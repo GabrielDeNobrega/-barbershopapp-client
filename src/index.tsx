@@ -1,19 +1,30 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/index.css';
 import ReactDOM from 'react-dom/client';
-import React from 'react';
-import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
+import App from './App';
+import { AuthInterceptor } from './components/security/AuthInterceptor';
+import { setDefaultAxiosAuthToken } from './config/axiosConfig';
+import { AuthProvider } from './contexts/AuthContext';
+import { LoadingProvider } from './contexts/LoadingContext';
+import { getToken } from './services/local-storage/localStorageService';
+import './styles/index.css';
 
+
+setDefaultAxiosAuthToken(getToken());
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App/>
-    </BrowserRouter>
-  </React.StrictMode>
+  <AuthProvider>
+    <LoadingProvider>
+      <BrowserRouter>
+        <AuthInterceptor>
+          <App />
+        </AuthInterceptor>
+      </BrowserRouter>
+    </LoadingProvider>
+  </AuthProvider>
 );
 

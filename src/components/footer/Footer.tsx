@@ -1,5 +1,3 @@
-import './styles.css'
-
 const Footer = () => {
   return (
     <div className='footer keep-in-bottom-page' >
