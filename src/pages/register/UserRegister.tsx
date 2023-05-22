@@ -25,7 +25,7 @@ const UserRegister: React.FC<UserRegisterProps> = ({
     serviceCall,
     userType = Role.Customer,
     whenCreatedRedirectTo = undefined }: UserRegisterProps) => {
-        
+
     const [loading, isLoading] = useLoading();
     const navigate = useNavigate();
 
@@ -51,6 +51,7 @@ const UserRegister: React.FC<UserRegisterProps> = ({
             email: '',
             birth: new Date().toISOString(),
             password: '',
+            phoneNumber: '',
             role: userType,
             cpf: '',
             active: true,
@@ -65,6 +66,7 @@ const UserRegister: React.FC<UserRegisterProps> = ({
             username: yup.string().required(),
             email: yup.string().email().required(),
             password: addRequireForPassword(yup),
+            phoneNumber: yup.string().required(),
             birth: yup.date().required(),
             cpf: yup.string().test('CPF-test', 'Invalid CPF', (cpf) => isValidCPF(cpf)).required(),
         }),
@@ -100,7 +102,7 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                             </Row>
                             <Row>
                                 <Col md={5}>
-                                    <FormGroup className="mb-3" controlId="loginFormUsername" >
+                                    <FormGroup className="mb-3" controlId="registerFormUsername" >
                                         <FormLabel>Username</FormLabel>
                                         <FormControl
                                             type="text"
@@ -117,7 +119,7 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                                     </FormGroup>
                                 </Col>
                                 <Col>
-                                    <FormGroup className="mb-3 " controlId="loginFormEmail" >
+                                    <FormGroup className="mb-3 " controlId="registerFormEmail" >
                                         <FormLabel>Email</FormLabel>
                                         <FormControl type="email"
                                             name="user.email"
@@ -136,8 +138,8 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                             </Row>
 
                             <Row>
-                                <Col md={5}>
-                                    <FormGroup className="mb-3" controlId="loginFormEmail" >
+                                <Col md={3}>
+                                    <FormGroup className="mb-3" controlId="registerFormBirthDate" >
                                         <FormLabel>Birth Date</FormLabel>
                                         <FormControl type="date"
                                             name="user.birth"
@@ -152,8 +154,9 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                                         <FormControl.Feedback type="invalid">{errors?.user?.birth}</FormControl.Feedback>
                                     </FormGroup>
                                 </Col>
+                               
                                 <Col>
-                                    <FormGroup className="mb-3" controlId="loginFormEmail" >
+                                    <FormGroup className="mb-3" controlId="registerFormCPF">
                                         <FormLabel>CPF</FormLabel>
                                         <FormControl type="text"
                                             name="user.cpf"
@@ -170,7 +173,21 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                                         <FormControl.Feedback type="invalid">{errors?.user?.cpf}</FormControl.Feedback>
                                     </FormGroup>
                                 </Col>
-
+                                <Col md={4}>
+                                    <FormGroup className="mb-3" controlId="registerFormPhoneNumber" >
+                                        <FormLabel>Phone</FormLabel>
+                                        <FormControl type="text"
+                                            name="user.phoneNumber"
+                                            value={values.user.phoneNumber}
+                                            placeholder="Insert your phone number"
+                                            className='border border-dark border-2'
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            isInvalid={(touched?.user?.phoneNumber && errors?.user?.phoneNumber) as boolean}
+                                            isValid={touched?.user?.phoneNumber && !errors?.user?.phoneNumber} />
+                                        <FormControl.Feedback type="invalid">{errors?.user?.phoneNumber}</FormControl.Feedback>
+                                    </FormGroup>
+                                </Col>
                             </Row>
 
                             <Row>

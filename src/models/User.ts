@@ -3,6 +3,7 @@ export interface User {
     username: string;
     email: string;
     cpf: string;
+    phoneNumber:string;
     active: boolean;
     birth: string ;
     password: string;
