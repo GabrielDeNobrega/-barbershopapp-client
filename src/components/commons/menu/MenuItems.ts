@@ -32,4 +32,14 @@ export const MenuItems : Array<MenuItem> = [
         navigateTo: 'manage-purchases',
         allowedRoles: [Role.Admin]
     },
+    {
+        buttonText: 'Schedule an Appointment',
+        card: {
+            text: 'Schedule an Appointment',
+            title: 'Appointment'
+        },
+        iconName: "schedule",
+        navigateTo: '/customer/appointment/schedule',
+        allowedRoles: [Role.Customer]
+    },
 ]

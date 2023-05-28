@@ -17,6 +17,7 @@ import { RegisterCustomer } from "./pages/register/RegisterCustomer"
 import { RegisterAdministrator } from "./pages/register/RegisterAdministrator"
 import { CustomerHome } from "./pages/customer/CustomerHome"
 import { EmployeeHome } from "./pages/employee/EmployeeHome"
+import ScheduleAppointment from "./pages/customer/appointment/ScheduleAppointment"
 
 const App = () => {
   return (
@@ -45,6 +46,7 @@ const App = () => {
 
             <Route path="/customer" element={<ProtectedRoutes allowedRoles={[Role.Customer]} redirectTo="/" />}>
               <Route index element={<CustomerHome />}></Route>
+              <Route path="appointment/schedule" element={<ScheduleAppointment />}></Route>
             </Route>
 
             <Route path="/admin" element={<ProtectedRoutes allowedRoles={[Role.Admin]} redirectTo="/" />}>

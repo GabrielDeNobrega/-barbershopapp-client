@@ -19,7 +19,7 @@ const Header = () => {
         <>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container fluid>
-                    <Navbar.Brand><Link to="/customer" className="navbar-brand" >BarberShop</Link> </Navbar.Brand>
+                    <Navbar.Brand><Link to="/" className="navbar-brand" >BarberShop</Link> </Navbar.Brand>
                     <Navbar.Toggle />
                     <Navbar.Offcanvas
                         placement="start">
@@ -38,14 +38,14 @@ const Header = () => {
                                 <ShowIfUserHasRole role={Role.Customer}>
                                     <CustomLink to={'/customer'}>Customer Area</CustomLink>
                                     <CustomLink to={'/customer/appointment/history'}>My Appointments</CustomLink>
-                                    <CustomLink to={'/customer/appointment/schedule '}>Schedule a Appointment</CustomLink>
+                                    <CustomLink to={'/customer/appointment/schedule'}>Schedule a Appointment</CustomLink>
                                 </ShowIfUserHasRole>
                                 <ShowIfUserHasRole role={Role.Employee}>
                                     <CustomLink to={'/employee'}>Employee Area</CustomLink>
                                     <CustomLink to={'/employee/reception/history'}>Reception History</CustomLink>
                                 </ShowIfUserHasRole>
                                 {!user && <CustomLink to={'/register/customer'}>Register</CustomLink>}
-                                <CustomLink to={'/login'} onClick={onLogoutHandler} >{user && 'Logout' || 'Login'}</CustomLink>
+                                <CustomLink to={'/login'} onClick={onLogoutHandler} >{(user && 'Logout') || 'Login'}</CustomLink>
                             </Nav>
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
