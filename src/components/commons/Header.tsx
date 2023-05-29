@@ -42,7 +42,7 @@ const Header = () => {
                                 </ShowIfUserHasRole>
                                 <ShowIfUserHasRole role={Role.Employee}>
                                     <CustomLink to={'/employee'}>Employee Area</CustomLink>
-                                    <CustomLink to={'/employee/reception/history'}>Reception History</CustomLink>
+                                    <CustomLink to={'/employee/appointment/reception-history'}>Reception History</CustomLink>
                                 </ShowIfUserHasRole>
                                 {!user && <CustomLink to={'/register/customer'}>Register</CustomLink>}
                                 <CustomLink to={'/login'} onClick={onLogoutHandler} >{(user && 'Logout') || 'Login'}</CustomLink>
@@ -57,9 +57,3 @@ const Header = () => {
 }
 
 export default Header
-
-const TestLink: React.FC<React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>> = (props) => {
-    return (
-        <a {...props}>CustomLink</a>
-    )
-}

@@ -9,4 +9,5 @@ export interface Appointment {
     employee: User
     service: Service
     createdAt: string
+    active:boolean
 }

@@ -42,4 +42,14 @@ export const MenuItems : Array<MenuItem> = [
         navigateTo: '/customer/appointment/schedule',
         allowedRoles: [Role.Customer]
     },
+    {
+        buttonText: 'My Appointments Performed',
+        card: {
+            text: 'See all your performed appointments',
+            title: 'Appointments Performed'
+        },
+        iconName: "home_repair_service",
+        navigateTo: '/employee/appointment/reception-history',
+        allowedRoles: [Role.Employee]
+    },
 ]

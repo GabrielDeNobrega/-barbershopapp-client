@@ -4,7 +4,10 @@ const API = {
         RegisterCustomer: "/user/register",
         GetAllEmployees: "/employee/all",
         CreateAppointment: "/appointment/create",
-        GetAvailableAppointmentTimes: "/appointment/available-times"
+        GetAvailableAppointmentTimes: "/appointment/available-times",
+    },
+    Employee:{
+        GetAllAppointments: "/employee/appointment/all"
     },
     Admin: {
         RegisterEmployee: "/admin/register/employee",

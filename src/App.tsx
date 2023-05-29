@@ -1,23 +1,21 @@
-import { Button } from "react-bootstrap"
-import Home from "./pages/Home"
-import LandingPage from "./pages/LandingPage"
-import Header from "./components/commons/Header"
-import React from "react"
-import Footer from "./components/footer/Footer"
-import Login from "./pages/login/Login"
-import { ToastContainer } from "react-toastify"
-import Loading from "./components/commons/Loading"
 import { Route, Routes } from "react-router"
-import AdminHome from "./pages/admin/AdminHome"
+import { ToastContainer } from "react-toastify"
+import Header from "./components/commons/Header"
+import Loading from "./components/commons/Loading"
+import Footer from "./components/footer/Footer"
 import ProtectedRoutes from "./components/security/ProtectedRoutes"
 import { Role } from "./models/UserCredentials"
-import NotFound from "./pages/notFound/NotFound"
-import { RegisterEmployee } from "./pages/register/RegisterEmployee"
-import { RegisterCustomer } from "./pages/register/RegisterCustomer"
-import { RegisterAdministrator } from "./pages/register/RegisterAdministrator"
+import LandingPage from "./pages/LandingPage"
+import AdminHome from "./pages/admin/AdminHome"
 import { CustomerHome } from "./pages/customer/CustomerHome"
-import { EmployeeHome } from "./pages/employee/EmployeeHome"
 import ScheduleAppointment from "./pages/customer/appointment/ScheduleAppointment"
+import AppointmentsReceptionHistory from "./pages/employee/AppointmentsReceptionHistory"
+import { EmployeeHome } from "./pages/employee/EmployeeHome"
+import Login from "./pages/login/Login"
+import NotFound from "./pages/notFound/NotFound"
+import { RegisterAdministrator } from "./pages/register/RegisterAdministrator"
+import { RegisterCustomer } from "./pages/register/RegisterCustomer"
+import { RegisterEmployee } from "./pages/register/RegisterEmployee"
 
 const App = () => {
   return (
@@ -58,6 +56,7 @@ const App = () => {
             <Route path="/employee" element={<ProtectedRoutes allowedRoles={[Role.Employee]} redirectTo="/" />}>
               <Route>
                 <Route index element={<EmployeeHome />}></Route>
+                <Route path="appointment/reception-history" element={<AppointmentsReceptionHistory />}></Route>
               </Route>
             </Route>
             <Route path='*' element={<NotFound message='Page Not Found' />} />
