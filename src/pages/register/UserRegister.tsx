@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { Formik } from 'formik';
 import React from 'react';
-import { Button, Col, Container, Form, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap';
+import { Button, Col, Container, Form, FormCheck, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as yup from "yup";
@@ -14,6 +14,8 @@ import inMilliseconds from '../../utils/Awaiter';
 import { capitalize } from '../../utils/Capitalizer';
 import { convertToToastError } from '../../utils/ToastError';
 import isValidCPF from '../../utils/validators/CPFValidator';
+import { useState } from 'react';
+import TermsAndService from './TermsAndService';
 
 export interface UserRegisterProps {
     userType?: Role,
@@ -28,6 +30,7 @@ const UserRegister: React.FC<UserRegisterProps> = ({
 
     const [loading, isLoading] = useLoading();
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
 
     const onRegisterHandler = ({ user }: FormUserModel) => {
         isLoading(true);
@@ -44,7 +47,7 @@ const UserRegister: React.FC<UserRegisterProps> = ({
             .finally(() => isLoading(false))
     }
 
-    const initialValues = {
+    const initialValues: FormUserModel = {
         user: {
             id: '',
             username: '',
@@ -57,6 +60,7 @@ const UserRegister: React.FC<UserRegisterProps> = ({
             active: true,
         },
         confirmPassword: '',
+        confirmTermsOfService: false
     }
 
     const addRequireForPassword = (yup: any) => yup.string().min(8).label("password").required();
@@ -73,11 +77,13 @@ const UserRegister: React.FC<UserRegisterProps> = ({
         confirmPassword: addRequireForPassword(yup)
             .test("equalTest", "passwords must match", function (value: string, context: yup.TestContext) {
                 return context?.parent?.user?.password === value
-            })
+            }),
+        confirmTermsOfService: yup.boolean().oneOf([true], "You must accept the terms and service").required()
     });
 
     return (
         <Container fluid="sm" >
+            <TermsAndService onHide={() => { setShowModal(false) }} show={showModal} />
             <Row className='justify-content-md-center' style={{ minHeight: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center', paddingBottom: '30px' }}>
                 <Col className='col-xs-1 d-flex flex-column justify-content-md-center align-items-center' >
                     <Formik
@@ -154,7 +160,7 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                                         <FormControl.Feedback type="invalid">{errors?.user?.birth}</FormControl.Feedback>
                                     </FormGroup>
                                 </Col>
-                               
+
                                 <Col>
                                     <FormGroup className="mb-3" controlId="registerFormCPF">
                                         <FormLabel>CPF</FormLabel>
@@ -221,8 +227,26 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                                     <FormControl.Feedback>passwords match</FormControl.Feedback>
                                     <FormControl.Feedback type="invalid">{errors.confirmPassword}</FormControl.Feedback>
                                 </FormGroup>
+
                             </Row>
+
                             <Row>
+                                <FormGroup className="mb-3">
+                                    <FormCheck
+                                    className='color-dark'
+                                        type="checkbox"
+                                        name='confirmTermsOfService'
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        checked={values.confirmTermsOfService}
+                                        label={(<p>I agree to the <a href="#termsAndService"
+                                            onClick={() => setShowModal(true)}>terms and service</a> </p>)}
+                                        feedback={errors?.confirmTermsOfService}
+                                        feedbackType="invalid"
+                                        isInvalid={(touched.confirmTermsOfService && errors.confirmTermsOfService) as boolean}
+                                        autoComplete="on">
+                                    </FormCheck>
+                                </FormGroup>
                                 <FormGroup className='mt-2'>
                                     <Button variant="success" className='btn-dark center w-100' type='submit' disabled={!isValid}>
                                         Register {capitalize(userType)}
@@ -233,8 +257,8 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                     )}
                     </Formik>
                 </Col>
-            </Row>
-        </Container>
+            </Row >
+        </Container >
     )
 }
 

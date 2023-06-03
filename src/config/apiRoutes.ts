@@ -5,6 +5,7 @@ const API = {
         GetAllEmployees: "/employee/all",
         CreateAppointment: "/appointment/create",
         GetAvailableAppointmentTimes: "/appointment/available-times",
+        GetAllAppointments: "/user/appointments"
     },
     Employee:{
         GetAllAppointments: "/employee/appointment/all"
@@ -16,6 +17,9 @@ const API = {
     Service:{
         GetAll: "/service/all",
         GetById: "/service"
+    },
+    Appointment: {
+        ChangeStatus: "/appointment/status"
     }
 }
 

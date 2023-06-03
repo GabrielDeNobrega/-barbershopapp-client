@@ -1,7 +1,7 @@
 import { MenuItem } from "../../../models/MenuItem";
 import { Role } from "../../../models/UserCredentials";
 
-export const MenuItems : Array<MenuItem> = [
+const adminMenuItems = [
     {
         buttonText: 'Create a Employee',
         card: {
@@ -32,6 +32,9 @@ export const MenuItems : Array<MenuItem> = [
         navigateTo: 'manage-purchases',
         allowedRoles: [Role.Admin]
     },
+];
+
+const customerMenuItems = [
     {
         buttonText: 'Schedule an Appointment',
         card: {
@@ -43,13 +46,32 @@ export const MenuItems : Array<MenuItem> = [
         allowedRoles: [Role.Customer]
     },
     {
-        buttonText: 'My Appointments Performed',
+        buttonText: 'Appointments History',
         card: {
-            text: 'See all your performed appointments',
-            title: 'Appointments Performed'
+            text: 'See your scheduled Appointments',
+            title: 'Appointments History'
+        },
+        iconName: "history",
+        navigateTo: '/customer/appointment/history',
+        allowedRoles: [Role.Customer]
+    },
+];
+
+const employeeMenuItems = [
+    {
+        buttonText: 'Appointments',
+        card: {
+            text: 'See all your performed and ongoing appointments',
+            title: 'Performed/Ongoing Appointments'
         },
         iconName: "home_repair_service",
         navigateTo: '/employee/appointment/reception-history',
         allowedRoles: [Role.Employee]
     },
+];
+
+export const MenuItems: Array<MenuItem> = [
+    ...adminMenuItems,
+    ...customerMenuItems,
+    ...employeeMenuItems
 ]

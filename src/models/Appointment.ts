@@ -9,5 +9,12 @@ export interface Appointment {
     employee: User
     service: Service
     createdAt: string
-    active:boolean
+    status: AppointmentStatus
+}
+
+export enum AppointmentStatus {
+    SCHEDULED = "Scheduled",
+    CANCELED = "Canceled",
+    FINISHED = "Finished",
+    UNDEFINED = "undefined",
 }

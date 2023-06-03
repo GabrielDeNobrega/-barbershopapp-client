@@ -16,6 +16,7 @@ import NotFound from "./pages/notFound/NotFound"
 import { RegisterAdministrator } from "./pages/register/RegisterAdministrator"
 import { RegisterCustomer } from "./pages/register/RegisterCustomer"
 import { RegisterEmployee } from "./pages/register/RegisterEmployee"
+import CustomerAppointmentHistory from "./pages/customer/appointment/CustomerAppointmentHistory"
 
 const App = () => {
   return (
@@ -45,6 +46,7 @@ const App = () => {
             <Route path="/customer" element={<ProtectedRoutes allowedRoles={[Role.Customer]} redirectTo="/" />}>
               <Route index element={<CustomerHome />}></Route>
               <Route path="appointment/schedule" element={<ScheduleAppointment />}></Route>
+              <Route path="appointment/history" element={<CustomerAppointmentHistory />}></Route>
             </Route>
 
             <Route path="/admin" element={<ProtectedRoutes allowedRoles={[Role.Admin]} redirectTo="/" />}>

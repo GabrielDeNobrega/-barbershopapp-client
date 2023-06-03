@@ -42,7 +42,7 @@ const initialValues: FormAppointmentModel = {
       id: 0
     }
   },
-  date: '',
+  date: toFormatedDate(new Date(), "yyyy-mm-dd"),
   time: ''
 }
 

@@ -1,22 +1,20 @@
-import { AxiosResponse } from 'axios'
-import { useEffect, useState } from 'react'
-import { Button, Col, Container, Row, Stack, Table } from 'react-bootstrap'
-import Icon from '../../components/commons/Icon'
-import Title, { HeaderTypes } from '../../components/commons/Title'
-import Pagination from '../../components/commons/nagivation/Pagination'
-import { useLoading } from '../../contexts/LoadingContext'
-import { Appointment, AppointmentStatus } from '../../models/Appointment'
-import { Page } from '../../models/pagination/Page'
-import { getAllEmployeeAppointments } from '../../services/employeeService'
-import inMilliseconds from '../../utils/Awaiter'
-import { convertToToastError } from '../../utils/ToastError'
-import { changeAppointmentStatus } from '../../services/appointmentService'
-import { toast } from 'react-toastify'
-import { toFormatedDate } from '../../utils/DateConverter'
+import { AxiosResponse } from 'axios';
+import { useEffect, useState } from 'react';
+import { Col, Container, Row, Stack, Table } from 'react-bootstrap';
+import Icon from '../../../components/commons/Icon';
+import Title, { HeaderTypes } from '../../../components/commons/Title';
+import Pagination from '../../../components/commons/nagivation/Pagination';
+import { useLoading } from '../../../contexts/LoadingContext';
+import { Appointment } from '../../../models/Appointment';
+import { Page } from '../../../models/pagination/Page';
+import { getAppointmentsHistory } from '../../../services/customerService';
+import inMilliseconds from '../../../utils/Awaiter';
+import { toFormatedDate } from '../../../utils/DateConverter';
+import { convertToToastError } from '../../../utils/ToastError';
 
-type Props = {}
+type AppointmentHistoryProps = {}
 
-const AppointmentsReceptionHistory = (props: Props) => {
+const CustomerAppointmentHistory = (props: AppointmentHistoryProps) => {
 
     const [appointments, setAppointments] = useState<Array<Appointment>>([]);
     const [pagination, setPagination] = useState({ page: 0, totalPages: 10 });
@@ -24,18 +22,17 @@ const AppointmentsReceptionHistory = (props: Props) => {
     const [firstRun, setFirstRun] = useState(false);
 
     useEffect(() => {
-        getEmployeeAppointments();
+        getCustomerAppointments();
         setFirstRun(true);
     }, []);
 
-    const getEmployeeAppointments = async () => {
+    const getCustomerAppointments = async () => {
         isLoading(true);
-        await getAllEmployeeAppointments(pagination.page, 10)
+        await getAppointmentsHistory(pagination.page, 10)
             .then(async (response: AxiosResponse<Page<Appointment>>) => {
                 await inMilliseconds(500);
                 setPagination({ page: response.data.number, totalPages: response.data.totalPages })
                 setAppointments(response.data.content);
-
             }, async (axiosError) => {
                 await inMilliseconds(500);
                 convertToToastError(axiosError.response?.data);
@@ -45,38 +42,15 @@ const AppointmentsReceptionHistory = (props: Props) => {
             })
     }
 
-    const changeAppointmentStatusHandler = async (appointmentId: number, appointmentStatus: AppointmentStatus) => {
-        isLoading(true);
-        changeAppointmentStatus(appointmentId, appointmentStatus)
-            .then(async ({ data: appointment }: AxiosResponse<Appointment>) => {
-                await inMilliseconds(500);
-                updateAppointments(appointment)
-                toast.success(`Status of Appointment #${appointment.id} successfully changed to ${appointment.status}`)
-            }, async (axiosError) => {
-                await inMilliseconds(500);
-                convertToToastError(axiosError.response?.data);
-            })
-            .finally(() => isLoading(false))
-    }
-
-    const updateAppointments = (appointment: Appointment) => {
-        const appointmentsCopy = [...appointments];
-        const index = appointmentsCopy.findIndex(x => x.id === appointment.id)
-        appointmentsCopy[index] = appointment;
-        setAppointments(appointmentsCopy);
-    }
-
     const handlePrev = () => {
         setPagination({ ...pagination, page: pagination.page-- })
-        getEmployeeAppointments();
+        getCustomerAppointments();
     }
 
     const handleNext = () => {
         setPagination({ ...pagination, page: pagination.page++ })
-        getEmployeeAppointments();
+        getCustomerAppointments();
     }
-
-    const isAppointmentScheduled = (appointmentStatus: AppointmentStatus) => appointmentStatus === AppointmentStatus.SCHEDULED
 
     return (
 
@@ -91,7 +65,7 @@ const AppointmentsReceptionHistory = (props: Props) => {
                 }}>
                 {appointments.length > 0 && <Row>
                     <Row className='text-center my-4'>
-                        <Title headerType={HeaderTypes.h2}>Employee Performed/Ongoing Appointments</Title>
+                        <Title headerType={HeaderTypes.h2}>My Appointments History</Title>
                     </Row>
                     <Row className='justify-content-md-center mb-3 '>
                         <Col>
@@ -100,12 +74,11 @@ const AppointmentsReceptionHistory = (props: Props) => {
                                     <tr className="border border-2 centered-th bordered-th">
                                         <th>Code</th>
                                         <th>Customer Name</th>
-                                        <th>Employee</th>
+                                        <th>Employee Name</th>
+                                        <th>Creation Date</th>
                                         <th>Service Type</th>
                                         <th>Service Price</th>
-                                        <th>Creation Date</th>
                                         <th>Status</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -114,21 +87,10 @@ const AppointmentsReceptionHistory = (props: Props) => {
                                             <td>{id}</td>
                                             <td className="border border-2">{customer.username}</td>
                                             <td>{employee.username}</td>
+                                            <td>{toFormatedDate(new Date(createdAt))}</td>
                                             <td>{service.kindOfCare}</td>
                                             <td>{service.currentPrice.toFixed(2)}</td>
-                                            <td>{toFormatedDate(new Date(createdAt)) }</td>
                                             <td>{status}</td>
-                                            <td className='d-flex justify-content-center'>
-                                                <Stack direction='horizontal' gap={3}>
-                                                    <Button className='btn-success'
-                                                        disabled={!isAppointmentScheduled(status)}
-                                                        onClick={() => changeAppointmentStatusHandler(id, AppointmentStatus.FINISHED)}>Conclude</Button>
-                                                    <Button className='btn-danger'
-                                                        disabled={!isAppointmentScheduled(status)}
-                                                        onClick={() => changeAppointmentStatusHandler(id, AppointmentStatus.CANCELED)}>Cancel</Button>
-                                                </Stack>
-                                            </td>
-
                                         </tr>
                                     ))}
                                 </tbody>
@@ -167,4 +129,4 @@ const AppointmentsReceptionHistory = (props: Props) => {
     )
 }
 
-export default AppointmentsReceptionHistory
+export default CustomerAppointmentHistory
