@@ -9,7 +9,7 @@ import { Appointment } from '../../../models/Appointment';
 import { Page } from '../../../models/pagination/Page';
 import { getAppointmentsHistory } from '../../../services/customerService';
 import inMilliseconds from '../../../utils/Awaiter';
-import { toFormatedDate } from '../../../utils/DateConverter';
+import { toFormatedDate, toFormatedDateString } from '../../../utils/DateConverter';
 import { convertToToastError } from '../../../utils/ToastError';
 
 type AppointmentHistoryProps = {}
@@ -72,25 +72,25 @@ const CustomerAppointmentHistory = (props: AppointmentHistoryProps) => {
                                 <thead>
                                     <tr className="border border-2 centered-th bordered-th">
                                         <th>Code</th>
-                                        <th>Customer Name</th>
                                         <th>Employee Name</th>
-                                        <th>Creation Date</th>
+                                        <th>Scheduled Time</th>
                                         <th>Service Name</th>
                                         <th>Service Type</th>
                                         <th>Service Price</th>
+                                        <th>Creation Date</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {appointments?.map(({ id, customer, employee, service, status, createdAt }) => (
+                                    {appointments?.map(({ id, customer, employee, service, status, createdAt, start, end }) => (
                                         <tr key={id} className="centered-td bordered-td">
                                             <td>{id}</td>
-                                            <td className="border border-2">{customer.username}</td>
                                             <td>{employee.username}</td>
-                                            <td>{toFormatedDate(new Date(createdAt))}</td>
+                                            <td>{`${toFormatedDateString(start, "HH:MM")} - ${toFormatedDateString(end, "HH:MM")}`}</td>
                                             <td>{service.name}</td>
                                             <td>{service.kindOfCare}</td>
                                             <td>{service.currentPrice.toFixed(2)}</td>
+                                            <td>{toFormatedDateString(createdAt)}</td>
                                             <td>{status}</td>
                                         </tr>
                                     ))}
