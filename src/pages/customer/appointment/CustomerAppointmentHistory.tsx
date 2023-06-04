@@ -75,6 +75,7 @@ const CustomerAppointmentHistory = (props: AppointmentHistoryProps) => {
                                         <th>Customer Name</th>
                                         <th>Employee Name</th>
                                         <th>Creation Date</th>
+                                        <th>Service Name</th>
                                         <th>Service Type</th>
                                         <th>Service Price</th>
                                         <th>Status</th>
@@ -87,6 +88,7 @@ const CustomerAppointmentHistory = (props: AppointmentHistoryProps) => {
                                             <td className="border border-2">{customer.username}</td>
                                             <td>{employee.username}</td>
                                             <td>{toFormatedDate(new Date(createdAt))}</td>
+                                            <td>{service.name}</td>
                                             <td>{service.kindOfCare}</td>
                                             <td>{service.currentPrice.toFixed(2)}</td>
                                             <td>{status}</td>
