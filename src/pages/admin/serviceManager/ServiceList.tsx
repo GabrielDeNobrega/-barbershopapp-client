@@ -10,6 +10,7 @@ import { cahngeServiceStatus, getAllServicesPaged } from '../../../services/serv
 import inMilliseconds from '../../../utils/Awaiter';
 import { toFormatedDate } from '../../../utils/DateConverter';
 import { convertToToastError } from '../../../utils/ToastError';
+import Icon from '../../../components/commons/Icon';
 
 type ServiceListProps = {}
 
@@ -18,6 +19,7 @@ const ServiceList = (props: ServiceListProps) => {
     const [services, setServices] = useState<Array<Service>>([]);
     const [pagination, setPagination] = useState({ page: 0, totalPages: 10 });
     const [loading, isLoading] = useLoading();
+    const [firstRun, setFirstRun] = useState(false);
 
     useEffect(() => {
         getServiceList();
@@ -29,7 +31,8 @@ const ServiceList = (props: ServiceListProps) => {
             .then(async ({ data }: AxiosResponse<Page<Service>>) => {
                 await inMilliseconds(500);
                 setPagination({ page: data.number, totalPages: data.totalPages })
-                setServices(data.content)
+                setServices(data.content);
+                if (!firstRun) setFirstRun(true);
             }, async (axiosError) => {
                 await inMilliseconds(500);
                 convertToToastError(axiosError.response?.data);
@@ -76,7 +79,7 @@ const ServiceList = (props: ServiceListProps) => {
                     justifyContent: 'center',
                     paddingBottom: '30px',
                 }}>
-                {services.length > 0 && <Row>
+                {(services.length > 0 && <Row>
                     <Row className='text-center my-4'>
                         <Title headerType={HeaderTypes.h2}>Service List</Title>
                     </Row>
@@ -128,7 +131,13 @@ const ServiceList = (props: ServiceListProps) => {
                                 handleNextPage={handleNext} />
                         </Col>
                     </Row>
-                </Row>
+                </Row>) || (firstRun &&
+                    <Row className='text-center'>
+                        <Icon size={128} color='dark'>query_stats</Icon>
+                        <div>
+                            <p className='h2 text-break '>No service found</p>
+                        </div>
+                    </Row>)
                 }
             </Stack>
         </Container >
