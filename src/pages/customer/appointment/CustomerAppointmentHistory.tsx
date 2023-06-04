@@ -2,14 +2,14 @@ import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { Col, Container, Row, Stack, Table } from 'react-bootstrap';
 import Icon from '../../../components/commons/Icon';
-import Title, { HeaderTypes } from '../../../components/commons/Title';
 import Pagination from '../../../components/commons/nagivation/Pagination';
+import Title, { HeaderTypes } from '../../../components/commons/Title';
 import { useLoading } from '../../../contexts/LoadingContext';
 import { Appointment } from '../../../models/Appointment';
 import { Page } from '../../../models/pagination/Page';
 import { getAppointmentsHistory } from '../../../services/customerService';
 import inMilliseconds from '../../../utils/Awaiter';
-import { toFormatedDate, toFormatedDateString } from '../../../utils/DateConverter';
+import { toFormatedDateString } from '../../../utils/DateConverter';
 import { convertToToastError } from '../../../utils/ToastError';
 
 type AppointmentHistoryProps = {}

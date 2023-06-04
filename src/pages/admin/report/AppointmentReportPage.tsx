@@ -9,7 +9,7 @@ import { getAppointmentReport } from '../../../services/reportService';
 import { convertToToastError } from '../../../utils/ToastError';
 import { Button, Col, Container, Form, FormControl, FormGroup, FormLabel, Row, Stack, Table } from 'react-bootstrap';
 import Title, { HeaderTypes } from '../../../components/commons/Title';
-import { toFormatedDate, toFormatedDateString } from '../../../utils/DateConverter';
+import { toFormatedDate, toFormatedDateStringUTC } from '../../../utils/DateConverter';
 import Icon from '../../../components/commons/Icon';
 import Pagination from '../../../components/commons/nagivation/Pagination';
 import { Prev } from 'react-bootstrap/esm/PageItem';
@@ -142,7 +142,7 @@ const AppointmentReportPage = (props: AppointmentReportPageProps) => {
                                             <td>{id}</td>
                                             <td className="border border-2">{customer.username}</td>
                                             <td>{employee.username}</td>
-                                            <td>{toFormatedDateString(createdAt)}</td>
+                                            <td>{toFormatedDateStringUTC(createdAt)}</td>
                                             <td>{service.kindOfCare}</td>
                                             <td>{service.currentPrice.toFixed(2)}</td>
                                             <td>{status}</td>
