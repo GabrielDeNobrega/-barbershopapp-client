@@ -12,15 +12,19 @@ const API = {
     },
     Admin: {
         RegisterEmployee: "/admin/register/employee",
-        RegisterAdministrator: "/admin/register/administrator" 
+        RegisterAdministrator: "/admin/register/administrator",
+        AppointmentReport: "/admin/report/appointments"
     },
     Service:{
         GetAll: "/service/all",
-        GetById: "/service"
+        GetAllPaginated: "/service/all/paginated",
+        GetById: "/service",
+        Create: "/service/add",
+        ChangeActiveStatus: "/service/status/change"
     },
     Appointment: {
         ChangeStatus: "/appointment/status"
-    }
+    },
 }
 
 export default API

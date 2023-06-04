@@ -15,7 +15,7 @@ const adminMenuItems = [
     {
         buttonText: 'Create a Administrator',
         card: {
-            text: 'Create a new administrator that will have maxim access to the system',
+            text: 'Create a new administrator that will have maximum access to the system',
             title: 'Administrator Creation'
         },
         iconName: "add_moderator",
@@ -23,13 +23,33 @@ const adminMenuItems = [
         allowedRoles: [Role.Admin]
     },
     {
-        buttonText: 'Go Manage Purchases',
+        buttonText: 'Service Creation',
         card: {
-            text: 'Manage Purchases',
-            title: 'Purchases'
+            text: 'Creates a new Service',
+            title: 'Service Creation'
         },
-        iconName: "group_add",
-        navigateTo: 'manage-purchases',
+        iconName: "design_services",
+        navigateTo: '/admin/service/creation',
+        allowedRoles: [Role.Admin]
+    },
+    {
+        buttonText: 'Service List',
+        card: {
+            text: 'See All Created Services ',
+            title: 'Service List'
+        },
+        iconName: "receipt_long",
+        navigateTo: '/admin/service/list',
+        allowedRoles: [Role.Admin]
+    },
+    {
+        buttonText: 'Appointments Report',
+        card: {
+            text: 'Report of All Appointments',
+            title: 'Appointments Report'
+        },
+        iconName: "analytics",
+        navigateTo: '/admin/report/appointment',
         allowedRoles: [Role.Admin]
     },
 ];

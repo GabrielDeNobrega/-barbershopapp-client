@@ -105,7 +105,7 @@ const AppointmentsReceptionHistory = (props: Props) => {
                                         <th>Service Price</th>
                                         <th>Creation Date</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Mark As</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -122,10 +122,10 @@ const AppointmentsReceptionHistory = (props: Props) => {
                                                 <Stack direction='horizontal' gap={3}>
                                                     <Button className='btn-success'
                                                         disabled={!isAppointmentScheduled(status)}
-                                                        onClick={() => changeAppointmentStatusHandler(id, AppointmentStatus.FINISHED)}>Conclude</Button>
+                                                        onClick={() => changeAppointmentStatusHandler(id, AppointmentStatus.FINISHED)}>Done</Button>
                                                     <Button className='btn-danger'
                                                         disabled={!isAppointmentScheduled(status)}
-                                                        onClick={() => changeAppointmentStatusHandler(id, AppointmentStatus.CANCELED)}>Cancel</Button>
+                                                        onClick={() => changeAppointmentStatusHandler(id, AppointmentStatus.CANCELED)}>Canceled</Button>
                                                 </Stack>
                                             </td>
 

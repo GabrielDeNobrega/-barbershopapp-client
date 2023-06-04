@@ -120,7 +120,10 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                                             onBlur={handleBlur}
                                             isInvalid={(touched?.user?.username && errors?.user?.username) as boolean}
                                             isValid={touched?.user?.username && !errors?.user?.username}
-                                            autoComplete="on" />
+                                            autoComplete="on"
+                                            aria-label="Username"
+                                            aria-required="true"
+                                        />
                                         <FormControl.Feedback type="invalid">{errors?.user?.username}</FormControl.Feedback>
                                     </FormGroup>
                                 </Col>
@@ -137,6 +140,8 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                                             isInvalid={(touched?.user?.email && errors?.user?.email) as boolean}
                                             isValid={touched?.user?.email && !errors?.user?.email}
                                             autoComplete="on"
+                                            aria-label="Email"
+                                            aria-required="true"
                                         />
                                         <FormControl.Feedback type="invalid">{errors?.user?.email}</FormControl.Feedback>
                                     </FormGroup>
@@ -156,7 +161,10 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                                             onBlur={handleBlur}
                                             isInvalid={(touched?.user?.birth && errors?.user?.birth) as boolean}
                                             isValid={touched?.user?.birth && !errors?.user?.birth}
-                                            autoComplete="on" />
+                                            autoComplete="on"
+                                            aria-label="Birthdate"
+                                            aria-required="true"
+                                            />
                                         <FormControl.Feedback type="invalid">{errors?.user?.birth}</FormControl.Feedback>
                                     </FormGroup>
                                 </Col>
@@ -174,6 +182,8 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                                             isInvalid={(touched?.user?.cpf && errors?.user?.cpf) as boolean}
                                             isValid={touched?.user?.cpf && !errors?.user?.cpf}
                                             autoComplete="on"
+                                            aria-label="CPF"
+                                            aria-required="true"
                                         />
                                         <FormControl.Feedback>CPF Looks good</FormControl.Feedback>
                                         <FormControl.Feedback type="invalid">{errors?.user?.cpf}</FormControl.Feedback>
@@ -190,7 +200,9 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             isInvalid={(touched?.user?.phoneNumber && errors?.user?.phoneNumber) as boolean}
-                                            isValid={touched?.user?.phoneNumber && !errors?.user?.phoneNumber} />
+                                            isValid={touched?.user?.phoneNumber && !errors?.user?.phoneNumber}
+                                            aria-label="Phone Number"
+                                            aria-required="true" />
                                         <FormControl.Feedback type="invalid">{errors?.user?.phoneNumber}</FormControl.Feedback>
                                     </FormGroup>
                                 </Col>
@@ -208,7 +220,9 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                                         onBlur={handleBlur}
                                         isInvalid={(touched?.user?.password && errors?.user?.password) as boolean}
                                         isValid={touched?.user?.password && !errors?.user?.password}
-                                        autoComplete="on" />
+                                        autoComplete="on"
+                                        aria-label="Password"
+                                        aria-required="true"/>
                                     <FormControl.Feedback>password Looks good</FormControl.Feedback>
                                     <FormControl.Feedback type="invalid">{errors?.user?.password}</FormControl.Feedback>
                                 </FormGroup>
@@ -223,7 +237,10 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                                         onBlur={handleBlur}
                                         isInvalid={(touched.confirmPassword && errors.confirmPassword) as boolean}
                                         isValid={touched.confirmPassword && !errors.confirmPassword}
-                                        autoComplete="on" />
+                                        autoComplete="on"
+                                        aria-label="Confirm Password"
+                                        aria-required="true"
+                                        />
                                     <FormControl.Feedback>passwords match</FormControl.Feedback>
                                     <FormControl.Feedback type="invalid">{errors.confirmPassword}</FormControl.Feedback>
                                 </FormGroup>
@@ -233,7 +250,7 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                             <Row>
                                 <FormGroup className="mb-3">
                                     <FormCheck
-                                    className='color-dark'
+                                        className='color-dark'
                                         type="checkbox"
                                         name='confirmTermsOfService'
                                         onChange={handleChange}

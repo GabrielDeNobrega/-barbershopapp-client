@@ -31,6 +31,7 @@ const messagesValidation = {
     required: 'Employee must be selected'
   }
 }
+
 const initialValues: FormAppointmentModel = {
   appointment: {
     start: '',
@@ -51,7 +52,9 @@ const initialService: Service = {
   duration: 0,
   id: 0,
   kindOfCare: '',
-  name: ''
+  name: '',
+  createdAt: '',
+  active: true
 }
 
 const ScheduleAppointment = (props: ScheduleAppointmentProps) => {
@@ -241,7 +244,7 @@ const ScheduleAppointment = (props: ScheduleAppointmentProps) => {
                       }}
                       onBlur={handleBlur}
                       isInvalid={(touched?.time && errors?.time) as boolean}
-                      isValid={touched?.time && !errors?.date}
+                      isValid={touched?.time && !errors?.time}
                       disabled={appointmentTime.length === 0 || values.appointment.employee.id === 0 || values.appointment.service.id === 0
                       }
                     >
