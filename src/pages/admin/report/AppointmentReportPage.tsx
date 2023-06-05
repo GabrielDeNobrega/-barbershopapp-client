@@ -97,6 +97,7 @@ const AppointmentReportPage = (props: AppointmentReportPageProps) => {
                                 autoComplete="on"
                                 onChange={handleChange}
                                 value={filter.startDate}
+                                max={toFormatedDate(new Date(), "yyyy-mm-dd")}
                             ></FormControl>
                         </FormGroup>
                         <FormGroup className="mb-3  d-flex flex-column justify-content-end" as={Col} sm={12} md={5}>
@@ -108,6 +109,7 @@ const AppointmentReportPage = (props: AppointmentReportPageProps) => {
                                 autoComplete="on"
                                 onChange={handleChange}
                                 value={filter.endDate}
+                                max={toFormatedDate(new Date(), "yyyy-mm-dd")}
                             ></FormControl>
                         </FormGroup>
                         <FormGroup className="mb-3 d-flex flex-column justify-content-end" as={Col} sm={12} md={2}>

@@ -12,7 +12,7 @@ import inMilliseconds from '../../utils/Awaiter'
 import { convertToToastError } from '../../utils/ToastError'
 import { changeAppointmentStatus } from '../../services/appointmentService'
 import { toast } from 'react-toastify'
-import { toFormatedDate } from '../../utils/DateConverter'
+import { toFormatedDate, toFormatedDateString } from '../../utils/DateConverter'
 
 type Props = {}
 
@@ -100,21 +100,23 @@ const AppointmentsReceptionHistory = (props: Props) => {
                                     <tr className="border border-2 centered-th bordered-th">
                                         <th>Code</th>
                                         <th>Customer Name</th>
+                                        <th>Scheduled Date</th>
+                                        <th>Scheduled Time</th>
                                         <th>Service Type</th>
                                         <th>Service Price</th>
-                                        <th>Creation Date</th>
                                         <th>Status</th>
                                         <th>Mark As</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {appointments?.map(({ id, customer, employee, service, status, createdAt }) => (
+                                    {appointments?.map(({ id, customer, employee, service, status, createdAt, start, end }) => (
                                         <tr key={id} className="centered-td bordered-td">
                                             <td>{id}</td>
                                             <td className="border border-2">{customer.username}</td>
+                                            <td>{toFormatedDate(new Date(createdAt)) }</td>
+                                            <td>{`${toFormatedDateString(start, "HH:MM")} - ${toFormatedDateString(end, "HH:MM")}`}</td>
                                             <td>{service.kindOfCare}</td>
                                             <td>{service.currentPrice.toFixed(2)}</td>
-                                            <td>{toFormatedDate(new Date(createdAt)) }</td>
                                             <td>{status}</td>
                                             <td className='d-flex justify-content-center'>
                                                 <Stack direction='horizontal' gap={3}>
