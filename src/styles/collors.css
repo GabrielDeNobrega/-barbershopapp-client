@@ -1,0 +1,57 @@
+:root {
+    --black: #000000;
+    --white: #FFFFFF;
+    --dark: #212529;
+}
+
+.bg-black {
+    background-color: var(--black);
+}
+
+.bg-white {
+    background-color: var(--white);
+}
+
+.bg-transparent {
+    background-color: transparent;
+}
+
+.bg-dark {
+    background-color: var(--dark);
+}
+
+.color-black {
+    color: var(--black);
+}
+
+.color-white {
+    color: var(--white);
+}
+
+.color-dark {
+    color: var(--dark);
+}
+
+.border-black {
+    border-color: var(--black) !important;
+}
+
+.border-white {
+    border-color: var(--white) !important;
+}
+
+.border-dark {
+    border-color: var(--dark) !important;
+}
+
+.text-black {
+    color: var(--black) !important;
+}
+
+.text-white {
+    color: var(--white) !important;
+}
+
+.text-dark {
+    color: var(--dark) !important;
+}

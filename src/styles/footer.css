@@ -1,0 +1,10 @@
+.footer {
+    width: 100%;
+    height: 45px;
+    background: var(--main-black);
+    margin-top: auto;
+}
+
+.keep-in-bottom-page {
+    margin-top: 'auto'
+}

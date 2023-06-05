@@ -1,0 +1,11 @@
+@import 'global-vars.css';
+@import 'google-icons.css';
+@import 'collors.css';
+@import 'footer.css';
+@import 'scroll-bar.css';
+
+.body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
