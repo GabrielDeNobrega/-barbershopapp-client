@@ -16,6 +16,7 @@ import { convertToToastError } from '../../utils/ToastError';
 import isValidCPF from '../../utils/validators/CPFValidator';
 import { useState } from 'react';
 import TermsAndService from './TermsAndService';
+import { toFormatedDate } from '../../utils/DateConverter';
 
 export interface UserRegisterProps {
     userType?: Role,
@@ -164,6 +165,7 @@ const UserRegister: React.FC<UserRegisterProps> = ({
                                             autoComplete="on"
                                             aria-label="Birthdate"
                                             aria-required="true"
+                                            max={toFormatedDate(new Date(), "yyyy-mm-dd")}
                                             />
                                         <FormControl.Feedback type="invalid">{errors?.user?.birth}</FormControl.Feedback>
                                     </FormGroup>

@@ -100,7 +100,6 @@ const AppointmentsReceptionHistory = (props: Props) => {
                                     <tr className="border border-2 centered-th bordered-th">
                                         <th>Code</th>
                                         <th>Customer Name</th>
-                                        <th>Employee</th>
                                         <th>Service Type</th>
                                         <th>Service Price</th>
                                         <th>Creation Date</th>
@@ -113,7 +112,6 @@ const AppointmentsReceptionHistory = (props: Props) => {
                                         <tr key={id} className="centered-td bordered-td">
                                             <td>{id}</td>
                                             <td className="border border-2">{customer.username}</td>
-                                            <td>{employee.username}</td>
                                             <td>{service.kindOfCare}</td>
                                             <td>{service.currentPrice.toFixed(2)}</td>
                                             <td>{toFormatedDate(new Date(createdAt)) }</td>

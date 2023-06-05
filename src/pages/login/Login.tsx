@@ -123,7 +123,7 @@ const Login = () => {
                                 Don’t have an account? create one <Link to={'/register/customer'} >here</Link>
                             </FormLabel>
                             <Button variant="dark" type="submit" disabled={!isValid || isSubmitting}>
-                                Submit
+                                Login
                             </Button>
                         </Form>
                     )}
