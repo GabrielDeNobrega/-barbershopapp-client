@@ -101,7 +101,7 @@ const AppointmentReportPage = (props: AppointmentReportPageProps) => {
                             ></FormControl>
                         </FormGroup>
                         <FormGroup className="mb-3  d-flex flex-column justify-content-end" as={Col} sm={12} md={5}>
-                            <FormLabel className='fw-semibold'>Start Date</FormLabel>
+                            <FormLabel className='fw-semibold'>End Date</FormLabel>
                             <FormControl type="date"
                                 className='border border-dark border-2'
                                 name="endDate"

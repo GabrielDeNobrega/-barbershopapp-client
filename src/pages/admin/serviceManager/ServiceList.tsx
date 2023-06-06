@@ -92,8 +92,8 @@ const ServiceList = (props: ServiceListProps) => {
                                         <th>Name</th>
                                         <th>Type Of Care</th>
                                         <th>Price</th>
-                                        <th>Status</th>
                                         <th>Creation Date</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -104,8 +104,8 @@ const ServiceList = (props: ServiceListProps) => {
                                             <td className="border border-2">{name}</td>
                                             <td>{kindOfCare}</td>
                                             <td>{currentPrice}</td>
-                                            <td>{active ? 'Active' : 'Inactive'}</td>
                                             <td>{toFormatedDate(new Date(createdAt))}</td>
+                                            <td>{active ? 'Active' : 'Inactive'}</td>
                                             <td>
                                                 <Stack direction='horizontal' gap={3} className='justify-content-center'>
                                                     <Button className={active ? 'btn-danger' : 'btn-success'}
